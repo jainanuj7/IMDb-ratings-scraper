@@ -11,10 +11,10 @@ This scraper can be used to generate following data for any TV show on IMDb.
 
 1. Download the repository or clone using ```git clone https://github.com/jainanuj7/IMDb-ratings-scraper.git```
 
-2. Open IMDb.py and edit the ```season_id``` and ```number_of_seasons``` variables <br>
+2. Open ```IMDb.py``` and edit the ```season_id``` and ```number_of_seasons``` variables <br>
 Eg for 'The Office' <br>
 IMDb URL: https://www.imdb.com/title/tt0386676/?ref_=ttep_ep_tt <br>
-Therefore ```season_id = 'tt0386676'``` and ```number_of_seasons = 10```
+Therefore ```season_id = 'tt0386676'``` and ```number_of_seasons = 9```
 
 3. Run IMDb.py ```python IMDb.py``` <br>
 Note: Internet connection will be required while running the script since it fetches live data
