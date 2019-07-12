@@ -20,16 +20,19 @@ number_of_seasons = 9
 
 #####################################################################
 
-ratings = []
-titles = []
-votes = []
-airdates = []
+
 
 # Scraper URL
 URL = "https://www.imdb.com/title/" + season_id + "/episodes/_ajax"
-
+dataset = pd.DataFrame([])
 for season in range(1, number_of_seasons+1):
-    print('[', strftime("%H:%M:%S") ,']', 'Finding IMDb ratings for season ', season, '..')
+    ratings = []
+    titles = []
+    votes = []
+    airdates = []
+    episodes = []
+    
+    print('[', strftime("%H:%M:%S") ,']', 'Finding IMDb data for season ', season, '..')
     PARAMS = {'season': season}
     r = requests.get(url = URL, params = PARAMS)
     
@@ -38,7 +41,9 @@ for season in range(1, number_of_seasons+1):
     
     
     rating_divs = soup.findAll("div", {"class": "ipl-rating-widget"})
-    for div in rating_divs:
+    for index, div in enumerate(rating_divs):
+        episodes.append(index + 1)
+        
         # Find IMDb rating
         rating_div_inner = div.findAll("div", {"ipl-rating-star small"})
         soup_inner_rating = rating_div_inner[0].findAll("span", {"ipl-rating-star__rating"})
@@ -69,10 +74,14 @@ for season in range(1, number_of_seasons+1):
         airdate_string = airdate_string.strip()
         airdates.append(airdate_string)
 
-# Preparing final data    
-data = {'Title': titles, 'IMDB Rating': ratings, 'Total Votes': votes, 'Air Date': airdates}
-df = pd.DataFrame(data)
+    number_of_ep = len(ratings)
+    seasons = [season] * number_of_ep
+    
+    # Preparing data for current season    
+    data = {'Season': seasons, 'Episode': episodes, 'Title': titles, 'IMDB Rating': ratings, 'Total Votes': votes, 'Air Date': airdates}
+    df = pd.DataFrame(data)
+    dataset = dataset.append(df)
 
 # Writing to CSV
-df.to_csv(season_id + '.csv', index=False)
+dataset.to_csv(season_id + '.csv', index=False)
 print('Finshed!')
