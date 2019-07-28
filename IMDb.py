@@ -1,3 +1,12 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Fri Jul 12 14:37:51 2019
+
+@author: jainanuj7
+
+Updated By: anchorP34 - Coverted script to class and functions so script can be imported for programs
+"""
+
 import requests 
 import pandas as pd
 from bs4 import BeautifulSoup
@@ -10,13 +19,6 @@ class IMDB_Web_Scrape():
         self.number_of_seasons = number_of_seasons
         
     def pull_seasons(self):
-
-        # -*- coding: utf-8 -*-
-        """
-        Created on Fri Jul 12 14:37:51 2019
-
-        @author: jainanuj7
-        """
 
         ######################### Change inputs here #########################
 
