@@ -10,16 +10,19 @@ This scraper can be used to generate following data for any TV show on IMDb.
 # How to run?
 
 1. Download the repository or clone using ```git clone https://github.com/jainanuj7/IMDb-ratings-scraper.git```
+2. Sample usage of ```IMDB_Web_Scrape``` class:
+```
+# Create an obejct of IMDB_Web_Scrape class and pass IMDb tv show id and number of shows
+# Eg creating obejct for The Office (US) https://www.imdb.com/title/tt0386676/
+TVShow = IMDB_Web_Scrape("tt0386676", 9)
 
-2. Open ```IMDb.py``` and edit the ```season_id``` and ```number_of_seasons``` variables <br>
-Eg for 'The Office' <br>
-IMDb URL: https://www.imdb.com/title/tt0386676/?ref_=ttep_ep_tt <br>
-Therefore ```season_id = 'tt0386676'``` and ```number_of_seasons = 9```
+# pull_seasons() returns the resultant pandas dataframe
+dataset = TVShow.pull_seasons()
 
-3. Run IMDb.py ```python IMDb.py``` <br>
-Note: Internet connection will be required while running the script since it fetches live data
+# Write dataset to csv
+dataset.to_csv("results.csv")
 
-4. Output will be generated within same folder
+```
 
 # Why was this scraper developed?
 Till date, IMDb doesn't have official APIs.
